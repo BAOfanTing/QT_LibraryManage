@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ic_badge1.svg</file>
+    </qresource>
+</RCC>
