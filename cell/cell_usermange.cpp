@@ -11,6 +11,10 @@ Cell_Usermange::Cell_Usermange(QWidget *parent)
 
   // 将数据模型与表格视图关联
   ui->tableView->setModel(&m_model);
+  //不能编辑表格
+  ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  //每次选中一行
+  ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 
   // 设置表格列头标签
   m_model.setHorizontalHeaderLabels(QStringList{"用户ID", "姓名", "年级", "所属学院", "权限", "用户名", "密码"});

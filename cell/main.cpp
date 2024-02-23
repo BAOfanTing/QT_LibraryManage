@@ -1,10 +1,13 @@
 #include "cell_main.h"
 #include <QApplication>
 #include "dialog_login.h"
+#include "lib/sqlmange.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    sqlmange::getInstance()->test();
+    sqlmange::getInstance()->test();
     Dialog_login dlg;
     int ret = dlg.exec();
 
