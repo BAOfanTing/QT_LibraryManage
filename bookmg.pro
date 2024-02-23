@@ -19,3 +19,5 @@ include($$PWD/lib/lib.pri)
 
 RESOURCES += \
     res/res.qrc
+
+RC_FILE = $$PWD/res/app.rc

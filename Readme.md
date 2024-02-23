@@ -5,3 +5,5 @@
 可参考博客：[我的博客](https://blog.csdn.net/szn1316159505/article/details/136206167)
 
 详细代码可看提交记录和提交信息
+
+编译是先删除bookmg.pro.user,因为在这是在我的电脑上生成的配置文件
