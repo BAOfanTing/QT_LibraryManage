@@ -6,6 +6,7 @@
 #include <QCoreApplication>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QSqlRecord>
 
 // sqlmange 类声明
 class sqlmange
@@ -67,5 +68,6 @@ private:
     //实例化数据库
     QSqlDatabase m_db;
 };
+
 
 #endif // SQLMANGE_H
