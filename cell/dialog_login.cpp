@@ -20,7 +20,8 @@ void Dialog_login::on_btn_login_clicked()
     this->hide();
 }
 
-void Dialog_login::on_pushButton_2_clicked()
+
+void Dialog_login::on_btn_exit_clicked()
 {
     setResult(0);
     this->hide();

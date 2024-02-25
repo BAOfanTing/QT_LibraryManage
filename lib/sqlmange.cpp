@@ -101,4 +101,15 @@ QVector<QStringList> sqlmange::getUsers(QString strCondition)
     return vec;
 }
 
+void sqlmange::DelUser(QString strID)
+{
+    // 创建 SQL 查询对象
+    QSqlQuery q(m_db);
+    // 构建 SQL 查询语句
+    // 使用占位符防止 SQL 注入攻击
+    QString strSql = QString("delete from user where userid = '%1'").arg(strID);
+    // 执行 SQL 查询
+    q.exec(strSql);
+}
+
 

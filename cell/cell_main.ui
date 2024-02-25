@@ -15,6 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QPushButton[name = &quot;btn&quot;]{border-radius:4px;background: #409eff; color:white;font -size:14px;min-height: 28px; min-width: 76px;padding:4px}
+QPushButton[name = &quot;btn&quot;]:pressed {background: #3a8ee6;}
 
 QLabel[name=&quot;title&quot;]{font:30px '黑体';}
 QLabel[name=&quot;lb&quot;]{font:14px '楷体';}

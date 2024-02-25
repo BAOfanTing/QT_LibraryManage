@@ -16,11 +16,11 @@ public:
     ~Dialog_login();
 
 private slots:
+    //登陆
     void on_btn_login_clicked();
 
-
-
-    void on_pushButton_2_clicked();
+    //退出
+    void on_btn_exit_clicked();
 
 private:
     Ui::Dialog_login *ui;

@@ -3,6 +3,7 @@
 
 #include <QPushButton>
 #include <QDebug>
+
 Cell_Main::Cell_Main(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Cell_Main)
@@ -49,6 +50,8 @@ void Cell_Main::initPage()
             connect(btn, &QPushButton::clicked, this, &Cell_Main::dealMenu);
         }
     }
+    // 第一次展示页面，显示用户管理页面
+    m_userpage->initPage("");
 }
 
 // 处理菜单栏按钮点击事件函数实现
@@ -67,6 +70,7 @@ void Cell_Main::dealMenu()
     do {
         if (str == "btn_user") {
             // 显示用户管理页面
+            m_userpage->initPage("");
             ui->stackedWidget->setCurrentIndex(0);
             break;
         } else if (str == "btn_book") {

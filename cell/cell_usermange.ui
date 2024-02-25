@@ -35,7 +35,7 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="btn_import">
         <property name="text">
          <string>用户导入</string>
         </property>
@@ -58,7 +58,7 @@
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="btn_del">
         <property name="text">
          <string>删除用户</string>
         </property>

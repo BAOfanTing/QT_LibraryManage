@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QStandardItemModel>
+#include "lib/sqlmange.h"
+#include <QMessageBox>
 
 // 命名空间声明
 namespace Ui {
@@ -20,6 +22,16 @@ public:
 
     // 析构函数
     ~Cell_Usermange() override;
+
+    void initPage(QString strCondition);
+
+private slots:
+
+
+    void on_btn_del_clicked();
+
+
+    void on_btn_import_clicked();
 
 private:
     // UI 界面指针

@@ -7,6 +7,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QSqlRecord>
+#include <QMessageBox>
 
 // sqlmange 类声明
 class sqlmange
