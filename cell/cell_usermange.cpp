@@ -98,5 +98,56 @@ void Cell_Usermange::on_btn_del_clicked()
 void Cell_Usermange::on_btn_import_clicked()
 {
     //导入用户并显示
+    // 打开文件选择对话框
+    QString strPath = QFileDialog::getOpenFileName(nullptr,"请输入文件路径");
+    if(!strPath.isEmpty())
+    {
+        // 打开 CSV 文件
+        QFile f(strPath);
+        f.open(QFile::ReadOnly|QFile::Text);
+
+        // 定义一个用于存储用户数据的容器
+        QVector<QStringList> addData;
+        while(!f.atEnd())
+        {
+           // 读取一行数据
+            QString str = f.readLine();
+
+            // 将一行数据分割成字符串列表
+            QStringList l = str.split(",");
+
+            // 判断列数是否正确
+            if (l.size() != 6)
+            {
+                // 弹出错误提示框
+                QMessageBox::information(nullptr, "错误", "导入失败，列数对不上");
+                return;
+            }
+
+            // 删除字符串末尾的换行符
+            l[l.size() - 1].chop(2);
+
+            // 将数据添加到容器中
+            addData.push_back(l);
+        }
+
+        // 弹出成功提示框
+        QMessageBox::information(nullptr, "成功", "导入成功");
+
+        // 使用 SQLManange 类添加用户
+        sqlmange::getInstance()->AddUser(addData);
+
+        // 刷新页面
+        initPage();
+
+    }
+}
+
+void Cell_Usermange::on_le_search_textChanged(const QString &text)
+{
+    //搜索用户
+    //使用字符串拼接来达到模糊搜索
+    QString strCond = QString("where username like '%1%' or nickname like '%2%'").arg(text).arg(text);
+    initPage(strCond);
 }
 

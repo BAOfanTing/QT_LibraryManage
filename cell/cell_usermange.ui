@@ -28,7 +28,7 @@
     <widget class="QWidget" name="widget" native="true">
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="le_search">
         <property name="name" stdset="0">
          <string>le</string>
         </property>

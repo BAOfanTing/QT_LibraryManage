@@ -29,7 +29,7 @@ public:
     QVector<QStringList> getUsers(QString strCondition = "");
 
     //添加用户
-    void AddUser(QVector<QStringList>);
+    void AddUser(QVector<QStringList> addData);
 
     //删除用户
     void DelUser(QString strID);

@@ -5,6 +5,9 @@
 #include <QStandardItemModel>
 #include "lib/sqlmange.h"
 #include <QMessageBox>
+#include <QFileDialog>
+#include <QFile>
+#include <QTextStream>
 
 // 命名空间声明
 namespace Ui {
@@ -27,11 +30,15 @@ public:
 
 private slots:
 
-
+    //删除用户
     void on_btn_del_clicked();
 
-
+    //导入所有用户
     void on_btn_import_clicked();
+
+    //搜索用户
+    void on_le_search_textChanged(const QString &text);
+
 
 private:
     // UI 界面指针

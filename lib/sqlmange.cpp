@@ -101,6 +101,30 @@ QVector<QStringList> sqlmange::getUsers(QString strCondition)
     return vec;
 }
 
+void sqlmange::AddUser(QVector<QStringList> addData)
+{
+    // 开启数据库事务
+    m_db.transaction();
+
+    // 创建 SQL 查询对象
+    QSqlQuery q(m_db);
+
+    // 遍历用户数据
+    for (int i = 0; i < addData.size(); i++)
+    {
+        // 构建 SQL 插入语句
+        // 使用占位符防止 SQL 注入攻击
+        // 将字符串转换为 UTF-8 编码，避免中文乱码
+        QString strSql = QString("insert into user VALUES(NULL,'%1','%2','%3','%4','%5','%6')").arg(addData[i][0].toUtf8()).arg(addData[i][1].toUtf8()).arg(addData[i][2].toUtf8()).arg(addData[i][3].toUtf8()).arg(addData[i][4].toUtf8()).arg(addData[i][5].toUtf8());
+
+        // 执行 SQL 插入
+        q.exec(strSql);
+    }
+
+    // 提交数据库事务
+    m_db.commit();
+}
+
 void sqlmange::DelUser(QString strID)
 {
     // 创建 SQL 查询对象
