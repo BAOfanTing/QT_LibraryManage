@@ -136,4 +136,100 @@ void sqlmange::DelUser(QString strID)
     q.exec(strSql);
 }
 
+QVector<QStringList> sqlmange::getBooks(QString strCondition)
+{
+    // 创建 SQL 查询对象
+    QSqlQuery q(m_db);
+    // 构建 SQL 查询语句
+    // 使用占位符防止 SQL 注入攻击
+    // 使用 strCondition 作为查询条件
+    QString strSql = QString("select * from book %1").arg(strCondition);
+
+    // 存储查询结果的容器
+    QVector<QStringList> vec;
+
+
+    // 执行 SQL 查询
+    bool ret = q.exec(strSql);
+
+    // 如果查询失败，输出错误信息
+    if(!ret)
+    {
+        qDebug()<<q.lastError().text();
+    }
+    else
+    {
+        // 获取查询结果的列数
+        int iCols = q.record().count();
+        // 临时存储每行的查询结果
+        QStringList l;
+
+        // 遍历查询结果
+        while(q.next())
+        {
+            // 遍历每一列
+            for (int i = 0;i< iCols;i++)
+            {
+                // 将当前列的值添加到临时列表中
+                l<<q.value(i).toString();
+            }
+            // 将临时列表添加到最终结果容器中
+            vec.push_back(l);
+
+            // 清空临时列表
+            l.clear();
+        }
+    }
+    // 返回查询结果
+    return vec;
+}
+
+QVector<QStringList> sqlmange::getRecords(QString strCondition)
+{
+    // 创建 SQL 查询对象
+    QSqlQuery q(m_db);
+    // 构建 SQL 查询语句
+    // 使用占位符防止 SQL 注入攻击
+    // 使用 strCondition 作为查询条件
+    QString strSql = QString("select * from record %1").arg(strCondition);
+
+    // 存储查询结果的容器
+    QVector<QStringList> vec;
+
+
+    // 执行 SQL 查询
+    bool ret = q.exec(strSql);
+
+    // 如果查询失败，输出错误信息
+    if(!ret)
+    {
+        qDebug()<<q.lastError().text();
+    }
+    else
+    {
+        // 获取查询结果的列数
+        int iCols = q.record().count();
+        // 临时存储每行的查询结果
+        QStringList l;
+
+        // 遍历查询结果
+        while(q.next())
+        {
+            // 遍历每一列
+            for (int i = 0;i< iCols;i++)
+            {
+                // 将当前列的值添加到临时列表中
+                l<<q.value(i).toString();
+            }
+            // 将临时列表添加到最终结果容器中
+            vec.push_back(l);
+
+            // 清空临时列表
+            l.clear();
+        }
+    }
+    // 返回查询结果
+    return vec;
+}
+
 

@@ -75,10 +75,12 @@ void Cell_Main::dealMenu()
             break;
         } else if (str == "btn_book") {
             // 显示图书管理页面
+            m_bookpage->initPage("");
             ui->stackedWidget->setCurrentIndex(1);
             break;
         } else if (str == "btn_record") {
             // 显示记录管理页面
+            m_recordpage->initPage("");
             ui->stackedWidget->setCurrentIndex(2);
             break;
         }

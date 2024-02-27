@@ -46,7 +46,7 @@
       <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit">
+         <widget class="QLineEdit" name="le_search">
           <property name="name" stdset="0">
            <string>le</string>
           </property>
@@ -106,7 +106,7 @@
          </widget>
         </item>
         <item row="0" column="6">
-         <widget class="QPushButton" name="pushButton_5">
+         <widget class="QPushButton" name="btn_borrow">
           <property name="text">
            <string>图书借阅</string>
           </property>
