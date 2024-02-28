@@ -42,6 +42,7 @@ public:
 
     //修改图书
     void ModBook(QStringList ldata);
+
     //删除图书
     void DelBook(QString strID);
 

@@ -47,9 +47,9 @@ void Dlg_BookAdd_Update::on_btn_ok_clicked()
         QVector<QStringList> vec;
         vec.push_back(l);
         sqlmange::getInstance()->AddBook(vec);
-        QMessageBox::information(nullptr, "成功", "添加图书成功");
-        this->hide();
+        QMessageBox::information(nullptr, "成功", "添加图书成功");  
     }
+    this->hide();
 
 }
 

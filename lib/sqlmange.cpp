@@ -209,6 +209,7 @@ void sqlmange::AddBook(QVector<QStringList> vec)
     q.exec(strSql);
 }
 
+//修改图书
 void sqlmange::ModBook(QStringList ldata)
 {
     //更新图书
@@ -216,15 +217,15 @@ void sqlmange::ModBook(QStringList ldata)
     QSqlQuery q(m_db);
     // 构建 SQL 查询语句
     // 使用占位符防止 SQL 注入攻击
-    QString strSql = QString("UPDATE book"
-                             "set name = '%1',press = '%2',type1 = '%3',type2 = '%4',type3 = '%5',count = '%6'"
+    QString strSql = QString("UPDATE book "
+                             "set name = '%1',press = '%2',type1 = '%3',type2 = '%4',type3 = '%5',count = '%6' "
                              "where bookid = '%7'")
                             .arg(ldata[1])
                             .arg(ldata[2])
-                            .arg(ldata[3])
                             .arg(ldata[4])
                             .arg(ldata[5])
                             .arg(ldata[6])
+                            .arg(ldata[3])
                             .arg(ldata[0]);
     // 执行 SQL 查询
     q.exec(strSql);
