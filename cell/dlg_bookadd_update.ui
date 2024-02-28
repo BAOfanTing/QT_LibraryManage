@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dlg_BookAdd_Update</class>
+ <widget class="QDialog" name="Dlg_BookAdd_Update">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>470</width>
+    <height>392</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>价格</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>类型1</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QComboBox" name="cb3">
+     <item>
+      <property name="text">
+       <string>历史</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>爱情</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>地理</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>动物</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QLineEdit" name="le_press"/>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>图书名称</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <widget class="QComboBox" name="cb2">
+     <item>
+      <property name="text">
+       <string>历史</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>爱情</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>地理</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>动物</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>数量</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLineEdit" name="le_name"/>
+   </item>
+   <item row="2" column="2">
+    <widget class="QLineEdit" name="le_count"/>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>类型3</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="QComboBox" name="cb1">
+     <item>
+      <property name="text">
+       <string>历史</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>爱情</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>地理</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>动物</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>类型2</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="3">
+    <widget class="QWidget" name="widget" native="true">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>60</height>
+      </size>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="btn_ok">
+        <property name="text">
+         <string>确定</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="btn_cancel">
+        <property name="text">
+         <string>取消</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

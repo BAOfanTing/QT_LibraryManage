@@ -9,7 +9,7 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QVector>
-
+#include "cell/dlg_bookadd_update.h"
 
 namespace Ui {
 class Cell_BookManger;
@@ -24,7 +24,7 @@ public:
     ~Cell_BookManger();
 
     //初始化界面
-    void initPage(QString strCondition = "");
+    void initPage(QString strCondition);
 
 private slots:
     void on_le_search_textChanged(const QString &arg1);
@@ -36,8 +36,6 @@ private slots:
     void on_btn_del_clicked();
 
     void on_btn_return_clicked();
-
-    void on_pushButton_5_clicked();
 
     void on_btn_borrow_clicked();
 

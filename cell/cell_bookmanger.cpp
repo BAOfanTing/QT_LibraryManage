@@ -21,7 +21,7 @@ Cell_BookManger::~Cell_BookManger()
     delete ui;
 }
 
-void Cell_BookManger::initPage(QString strCondition)
+void Cell_BookManger::initPage(QString strCondition = "")
 {
     //获取所有图书
     //查询数据库并显示
@@ -51,24 +51,70 @@ void Cell_BookManger::initPage(QString strCondition)
 void Cell_BookManger::on_le_search_textChanged(const QString &arg1)
 {
     //搜索图书
+    //使用字符串拼接来达到模糊搜索
+    QString strCond = QString("where name like '%1%' or type1 like '%2%' or type2 like '%3%' or type3 like '%4%'").arg(arg1).arg(arg1).arg(arg1).arg(arg1);
+    initPage(strCond);
 }
 
 
 void Cell_BookManger::on_btn_add_clicked()
 {
     //添加图书
+    Dlg_BookAdd_Update dlg;
+    dlg.exec();
+    initPage();
 }
 
 
 void Cell_BookManger::on_btn_mod_clicked()
 {
+
     //修改图书
+    // 获取当前选中的行号
+    int r = ui->tableView->currentIndex().row();
+
+    // 判断是否选中行
+    if (r < 0) {
+        // 弹出错误提示框
+        QMessageBox::information(nullptr, "错误", "没有选中图书");
+    }
+    else
+    {
+        QString id = m_model.item(r,0)->text();
+        Dlg_BookAdd_Update dlg;
+        dlg.setType(id.toInt());
+        dlg.exec();
+        QMessageBox::information(nullptr, "ok", "修改成功");
+    }
+    initPage();
 }
 
 
 void Cell_BookManger::on_btn_del_clicked()
 {
     //删除图书
+    // 获取当前选中的行号
+    int r = ui->tableView->currentIndex().row();
+
+    // 判断是否选中行
+    if (r < 0) {
+        // 弹出错误提示框
+        QMessageBox::information(nullptr, "错误", "没有选中图书");
+    }
+    else
+    {
+        // 获取选中行的用户ID,text变为QString
+        QString id = m_model.item(r, 0)->text();
+
+        // 使用 SQLManange 类删除用户
+        sqlmange::getInstance()->DelBook(id);
+
+        // 弹出成功提示框
+        QMessageBox::information(nullptr, "成功", "删除成功");
+
+        // 刷新页面
+        initPage();
+    }
 }
 
 

@@ -38,10 +38,10 @@ public:
     QVector<QStringList> getBooks(QString strCondition = "");
 
     //增加图书
-    void AddBook(QVector<QStringList>);
+    void AddBook(QVector<QStringList> vec);
 
     //修改图书
-    void ModBook(QString strID);
+    void ModBook(QStringList ldata);
     //删除图书
     void DelBook(QString strID);
 

@@ -184,6 +184,63 @@ QVector<QStringList> sqlmange::getBooks(QString strCondition)
     return vec;
 }
 
+void sqlmange::AddBook(QVector<QStringList> vec)
+{
+    //增加图书
+    // 创建 SQL 查询对象
+    QSqlQuery q(m_db);
+
+    if(vec.size() == 0)
+    {
+        return;
+    }
+    QStringList ldata = vec[0];
+    // 构建 SQL 查询语句
+    // 使用占位符防止 SQL 注入攻击
+    QString strSql = QString("INSERT INTO book "
+                             "values(NULL,'%1','%2','%3','%4','%5',%6,'')")
+                         .arg(ldata[1])
+                         .arg(ldata[2])
+                         .arg(ldata[4])
+                         .arg(ldata[5])
+                         .arg(ldata[6])
+                         .arg(ldata[3]);
+    // 执行 SQL 查询
+    q.exec(strSql);
+}
+
+void sqlmange::ModBook(QStringList ldata)
+{
+    //更新图书
+    // 创建 SQL 查询对象
+    QSqlQuery q(m_db);
+    // 构建 SQL 查询语句
+    // 使用占位符防止 SQL 注入攻击
+    QString strSql = QString("UPDATE book"
+                             "set name = '%1',press = '%2',type1 = '%3',type2 = '%4',type3 = '%5',count = '%6'"
+                             "where bookid = '%7'")
+                            .arg(ldata[1])
+                            .arg(ldata[2])
+                            .arg(ldata[3])
+                            .arg(ldata[4])
+                            .arg(ldata[5])
+                            .arg(ldata[6])
+                            .arg(ldata[0]);
+    // 执行 SQL 查询
+    q.exec(strSql);
+}
+
+void sqlmange::DelBook(QString strID)
+{
+    // 创建 SQL 查询对象
+    QSqlQuery q(m_db);
+    // 构建 SQL 查询语句
+    // 使用占位符防止 SQL 注入攻击
+    QString strSql = QString("delete from book where bookid = '%1'").arg(strID);
+    // 执行 SQL 查询
+    q.exec(strSql);
+}
+
 QVector<QStringList> sqlmange::getRecords(QString strCondition)
 {
     // 创建 SQL 查询对象
