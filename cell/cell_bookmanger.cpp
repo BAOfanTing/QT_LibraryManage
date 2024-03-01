@@ -148,6 +148,7 @@ void Cell_BookManger::on_btn_borrow_clicked()
 
         //传入bookid
         dlg.setBookID(id.toInt());
+        dlg.setType(false);
         int ret = dlg.exec();
 
         // 弹出成功提示框

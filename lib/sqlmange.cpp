@@ -251,7 +251,20 @@ void sqlmange::DelBook(QString strID)
 //归还图书
 QString sqlmange::ReturnBook(QString strUserID, QString strBookID)
 {
-
+    QSqlQuery q(m_db);
+    // 构建 SQL 查询语句
+    // 使用占位符防止 SQL 注入攻击
+    QString strSql = QString("UPDATE book set count = count+1 where bookid = '%1';"
+                             "DELETE * from record where bookid = '%2' and userid = '%3'")
+                         .arg(strBookID)
+                         .arg(strBookID)
+                         .arg(strUserID);
+    bool ret = q.exec(strSql);
+    if(!ret)
+    {
+        qDebug()<<q.lastError().text();
+    }
+    return QString("");
 }
 
 //图书借阅，谁借的，借的什么书
@@ -263,15 +276,21 @@ QString sqlmange::BorrowBook(QString strUserID, QString strBookID)
     QSqlQuery q(m_db);
     // 构建 SQL 查询语句
     // 使用占位符防止 SQL 注入攻击
-    QString strSql = QString("UPDATE book set count = count-1 where bookid = '%1';"
-                             "INSERT into record VALUES(NULL,'%2','%3','%4','%5')")
-                            .arg(strBookID)
+    QString strSql1 = QString("UPDATE book set count = count-1 where bookid = '%1'").arg(strBookID);
+    QString strSql2 = QString("INSERT into record VALUES(NULL,'%1','%2','%3','%4','')")
                             .arg(strBookID)
                             .arg(strUserID)
                             .arg(QDateTime::currentSecsSinceEpoch())
                             .arg(QDateTime::currentSecsSinceEpoch()+3600*24*10);
-    bool ret = q.exec(strSql);
-    if(!ret)
+
+    bool ret1 = q.exec(strSql1);
+    if(!ret1)
+    {
+        qDebug()<<q.lastError().text();
+    }
+
+    bool ret2 = q.exec(strSql2);
+    if(!ret2)
     {
         qDebug()<<q.lastError().text();
     }

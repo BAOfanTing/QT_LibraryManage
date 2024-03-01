@@ -51,7 +51,6 @@ void Dlg_BookAdd_Update::on_btn_ok_clicked()
     l << ui->cb2->currentText();
     l << ui->cb3->currentText();
     l << "";
-    qDebug()<< l;
     // 判断m_id是否为-1
     if (-1 != m_id) {
         // 更新书籍信息

@@ -26,6 +26,14 @@ void Dlg_book_bor::setBookID(int id)
 void Dlg_book_bor::setType(bool isReturn)
 {
     m_isReturn = isReturn;
+    if(m_isReturn)
+    {
+        ui->btn_ok->setText("归还");
+    }
+    else
+    {
+        ui->btn_ok->setText("借阅");
+    }
 }
 
 void Dlg_book_bor::on_btn_ok_clicked()
@@ -44,7 +52,6 @@ void Dlg_book_bor::on_btn_ok_clicked()
         // 登录验证
         bool ret = sqlmange::getInstance()->login(username, password, m_userid);
 
-        qDebug()<<"登陆成功";
         // 登录失败
         if (!ret)
         {
@@ -65,7 +72,6 @@ void Dlg_book_bor::on_btn_ok_clicked()
             sqlmange::getInstance()->BorrowBook(QString::number(m_userid), QString::number(m_bookid));
         }
 
-        qDebug()<<"借阅成功2";
         // 关闭对话框并返回成功状态
         this->done(1);
 

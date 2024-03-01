@@ -41,7 +41,7 @@ void Cell_RecordMange::initPage(QString strCondition = "")
     m_model.clear();
 
     //设置表格列头标签
-    m_model.setHorizontalHeaderLabels(QStringList{"图书id","用户id","价格","开始时间","结束时间","记录"});
+    m_model.setHorizontalHeaderLabels(QStringList{"id","图书id","用户id","开始时间","结束时间","记录"});
 
     for(int i = 0;i<l.size();i++)
     {
