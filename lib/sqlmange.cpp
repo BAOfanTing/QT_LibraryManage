@@ -32,7 +32,7 @@ void sqlmange::init()
     qDebug() << m_db.open();
 }
 
-bool sqlmange::login(QString strUsername, QString strPassword)
+bool sqlmange::login(QString strUsername, QString strPassword,int &userid)
 {
     // 创建 SQL 查询对象
     QSqlQuery q(m_db);
@@ -48,7 +48,12 @@ bool sqlmange::login(QString strUsername, QString strPassword)
     {
         qDebug()<<q.lastError().text();
     }
-
+    else
+    {
+        //拿到用户id
+        q.next();
+        userid << q.value(0).toInt();
+    }
     // 返回查询结果
     return ret;
 }
@@ -145,6 +150,7 @@ QVector<QStringList> sqlmange::getBooks(QString strCondition)
     // 使用 strCondition 作为查询条件
     QString strSql = QString("select * from book %1").arg(strCondition);
 
+    qDebug()<<strSql;
     // 存储查询结果的容器
     QVector<QStringList> vec;
 
@@ -240,6 +246,36 @@ void sqlmange::DelBook(QString strID)
     QString strSql = QString("delete from book where bookid = '%1'").arg(strID);
     // 执行 SQL 查询
     q.exec(strSql);
+}
+
+//归还图书
+QString sqlmange::ReturnBook(QString strUserID, QString strBookID)
+{
+
+}
+
+//图书借阅，谁借的，借的什么书
+QString sqlmange::BorrowBook(QString strUserID, QString strBookID)
+{
+    //借阅图书
+    //让书本的数量-1
+    // 创建 SQL 查询对象
+    QSqlQuery q(m_db);
+    // 构建 SQL 查询语句
+    // 使用占位符防止 SQL 注入攻击
+    QString strSql = QString("UPDATE book set count = count-1 where bookid = '%1';"
+                             "INSERT into record VALUES(NULL,'%2','%3','%4','%5')")
+                            .arg(strBookID)
+                            .arg(strBookID)
+                            .arg(strUserID)
+                            .arg(QDateTime::currentSecsSinceEpoch())
+                            .arg(QDateTime::currentSecsSinceEpoch()+3600*24*10);
+    bool ret = q.exec(strSql);
+    if(!ret)
+    {
+        qDebug()<<q.lastError().text();
+    }
+    return QString("");
 }
 
 QVector<QStringList> sqlmange::getRecords(QString strCondition)

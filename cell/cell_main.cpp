@@ -57,8 +57,8 @@ void Cell_Main::initPage()
 // 处理菜单栏按钮点击事件函数实现
 void Cell_Main::dealMenu()
 {
-    //调试显示按钮名称
-    qDebug()<<sender()->objectName();
+    // //调试显示按钮名称
+    // qDebug()<<sender()->objectName();
 
     // 获取发送信号的按钮对象
     QPushButton *btn = static_cast<QPushButton *>(sender());

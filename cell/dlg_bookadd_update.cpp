@@ -14,10 +14,24 @@ Dlg_BookAdd_Update::~Dlg_BookAdd_Update()
 }
 
 // 函数声明：设置书籍ID
-void Dlg_BookAdd_Update::setType(int l)
+void Dlg_BookAdd_Update::setType(int id)
 {
     // 将参数l赋值给成员变量m_id
-    m_id = l;
+    m_id = id;
+    //获取当前选中行的图书信息
+    QVector<QStringList> l = sqlmange::getInstance()->getBooks(QString("where bookid = %1 ").arg(m_id));
+
+    if(l.size() == 1)
+    {
+        QStringList data = l[0];
+        //使用set将文本填入到窗口
+        ui->le_name->setText(data[1]);
+        ui->le_press->setText(data[2]);
+        ui->cb1->setCurrentText(data[3]);
+        ui->cb2->setCurrentText(data[4]);
+        ui->cb3->setCurrentText(data[5]);
+        ui->le_count->setText(data[6]);
+    }
 }
 
 // 函数声明：确认按钮槽函数
@@ -47,7 +61,6 @@ void Dlg_BookAdd_Update::on_btn_ok_clicked()
         QVector<QStringList> vec;
         vec.push_back(l);
         sqlmange::getInstance()->AddBook(vec);
-        QMessageBox::information(nullptr, "成功", "添加图书成功");  
     }
     this->hide();
 

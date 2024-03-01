@@ -8,6 +8,7 @@
 #include <QSqlError>
 #include <QSqlRecord>
 #include <QMessageBox>
+#include <QDateTime>
 
 // sqlmange 类声明
 class sqlmange
@@ -23,7 +24,7 @@ public:
     void init();
 
     //登陆
-    bool login(QString strUsername ,QString strPassword);
+    bool login(QString strUsername ,QString strPassword,int &userid);
 
     //获取所有用户
     QVector<QStringList> getUsers(QString strCondition = "");

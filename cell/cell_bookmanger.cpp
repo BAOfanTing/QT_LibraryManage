@@ -103,7 +103,7 @@ void Cell_BookManger::on_btn_del_clicked()
     }
     else
     {
-        // 获取选中行的用户ID,text变为QString
+        // 获取选中行的图书ID,text变为QString
         QString id = m_model.item(r, 0)->text();
 
         // 使用 SQLManange 类删除用户
@@ -118,14 +118,43 @@ void Cell_BookManger::on_btn_del_clicked()
 }
 
 
-void Cell_BookManger::on_btn_return_clicked()
-{
-    //归还图书
-}
-
 
 void Cell_BookManger::on_btn_borrow_clicked()
 {
     //借阅图书
+    // 获取当前选中的行号
+    int r = ui->tableView->currentIndex().row();
+
+    // 判断是否选中行
+    if (r < 0) {
+        // 弹出错误提示框
+        QMessageBox::information(nullptr, "错误", "没有选中图书");
+    }
+    else
+    {
+        // 获取选中行的图书ID,text变为QString
+        QString id = m_model.item(r, 0)->text();
+
+        //获取数量
+        QString count = m_model.item(r, 6)->text();
+        if(count.toInt() <= 0 )
+        {
+             QMessageBox::information(nullptr, "信息", "借阅失败,图书数量不足");
+            return;
+        }
+
+        //执行借阅
+        Dlg_book_bor dlg;
+
+        //传入bookid
+        dlg.setBookID(id.toInt());
+        int ret = dlg.exec();
+
+        // 弹出成功提示框
+        QMessageBox::information(nullptr, "信息", ret?"借阅成功":"借阅失败");
+
+        // 刷新页面
+        initPage();
+    }
 }
 

@@ -10,6 +10,8 @@
 #include <QFile>
 #include <QVector>
 #include "cell/dlg_bookadd_update.h"
+#include "cell/dlg_book_bor.h"
+
 
 namespace Ui {
 class Cell_BookManger;
@@ -34,8 +36,6 @@ private slots:
     void on_btn_mod_clicked();
 
     void on_btn_del_clicked();
-
-    void on_btn_return_clicked();
 
     void on_btn_borrow_clicked();
 

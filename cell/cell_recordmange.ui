@@ -27,10 +27,30 @@
    <item row="1" column="0">
     <widget class="QWidget" name="widget" native="true">
      <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="3">
+       <widget class="QPushButton" name="btn_return">
+        <property name="text">
+         <string>图书归还</string>
+        </property>
+        <property name="name" stdset="0">
+         <string>btn</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="1">
        <widget class="QLineEdit" name="le_search">
         <property name="name" stdset="0">
          <string>le</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="btn_del">
+        <property name="text">
+         <string>删除记录</string>
+        </property>
+        <property name="name" stdset="0">
+         <string>btn</string>
         </property>
        </widget>
       </item>
@@ -47,17 +67,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="btn_del">
-        <property name="text">
-         <string>删除记录</string>
-        </property>
-        <property name="name" stdset="0">
-         <string>btn</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
+      <item row="0" column="4">
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>

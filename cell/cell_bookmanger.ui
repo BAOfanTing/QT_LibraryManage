@@ -45,6 +45,46 @@
       </item>
       <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="3">
+         <widget class="QPushButton" name="btn_mod">
+          <property name="text">
+           <string>修改</string>
+          </property>
+          <property name="name" stdset="0">
+           <string>btn</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QPushButton" name="btn_borrow">
+          <property name="text">
+           <string>图书借阅</string>
+          </property>
+          <property name="name" stdset="0">
+           <string>btn</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QPushButton" name="btn_del">
+          <property name="text">
+           <string>删除</string>
+          </property>
+          <property name="name" stdset="0">
+           <string>btn</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="btn_add">
+          <property name="text">
+           <string>增加</string>
+          </property>
+          <property name="name" stdset="0">
+           <string>btn</string>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="1">
          <widget class="QLineEdit" name="le_search">
           <property name="name" stdset="0">
@@ -62,56 +102,6 @@
           </property>
           <property name="name" stdset="0">
            <string>lb</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="5">
-         <widget class="QPushButton" name="btn_return">
-          <property name="text">
-           <string>图书归还</string>
-          </property>
-          <property name="name" stdset="0">
-           <string>btn</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="btn_add">
-          <property name="text">
-           <string>增加</string>
-          </property>
-          <property name="name" stdset="0">
-           <string>btn</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="4">
-         <widget class="QPushButton" name="btn_del">
-          <property name="text">
-           <string>删除</string>
-          </property>
-          <property name="name" stdset="0">
-           <string>btn</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3">
-         <widget class="QPushButton" name="btn_mod">
-          <property name="text">
-           <string>修改</string>
-          </property>
-          <property name="name" stdset="0">
-           <string>btn</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="6">
-         <widget class="QPushButton" name="btn_borrow">
-          <property name="text">
-           <string>图书借阅</string>
-          </property>
-          <property name="name" stdset="0">
-           <string>btn</string>
           </property>
          </widget>
         </item>
