@@ -22,13 +22,18 @@ Cell_RecordMange::~Cell_RecordMange()
 
 void Cell_RecordMange::on_le_search_textChanged(const QString &arg1)
 {
-
+    //搜索记录
+    //使用字符串拼接来达到模糊搜索
+    QString strCond = QString("where userid like '%1%' or bookid like '%2%'").arg(arg1).arg(arg1);
+    initPage(strCond);
 }
 
 
 void Cell_RecordMange::on_btn_del_clicked()
 {
-
+    sqlmange::getInstance()->clearRecord();
+    QMessageBox::information(nullptr, "信息", "清除成功");
+    initPage("");
 }
 
 void Cell_RecordMange::initPage(QString strCondition = "")
@@ -55,6 +60,39 @@ void Cell_RecordMange::initPage(QString strCondition = "")
         }
         //将行添加到表格模型中
         m_model.appendRow(items);
+    }
+}
+
+
+void Cell_RecordMange::on_btn_return_clicked()
+{
+    //借阅图书
+    // 获取当前选中的行号
+    int r = ui->tableView->currentIndex().row();
+
+    // 判断是否选中行
+    if (r < 0) {
+        // 弹出错误提示框
+        QMessageBox::information(nullptr, "错误", "没有选中图书");
+    }
+    else
+    {
+        // 获取选中行的图书ID,text变为QString
+        QString id = m_model.item(r, 0)->text();
+
+        //执行借阅
+        Dlg_book_bor dlg;
+
+        //传入bookid
+        dlg.setBookID(id.toInt());
+        dlg.setType(true);
+        int ret = dlg.exec();
+
+        // 弹出成功提示框
+        QMessageBox::information(nullptr, "信息", ret?"归还成功":"归还失败，账号或者密码错误");
+
+        // 刷新页面
+        initPage();
     }
 }
 

@@ -8,6 +8,7 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QTextStream>
+#include "cell/dlg_book_bor.h"
 
 namespace Ui {
 class Cell_RecordMange;
@@ -29,6 +30,8 @@ private slots:
     void on_btn_del_clicked();
 
 
+
+    void on_btn_return_clicked();
 
 private:
     Ui::Cell_RecordMange *ui;

@@ -51,8 +51,11 @@ bool sqlmange::login(QString strUsername, QString strPassword,int &userid)
     else
     {
         //拿到用户id
-        q.next();
-        userid << q.value(0).toInt();
+        ret = q.next();
+        if(ret)
+        {
+             userid << q.value(0).toInt();
+        }
     }
     // 返回查询结果
     return ret;
@@ -254,13 +257,18 @@ QString sqlmange::ReturnBook(QString strUserID, QString strBookID)
     QSqlQuery q(m_db);
     // 构建 SQL 查询语句
     // 使用占位符防止 SQL 注入攻击
-    QString strSql = QString("UPDATE book set count = count+1 where bookid = '%1';"
-                             "DELETE * from record where bookid = '%2' and userid = '%3'")
-                         .arg(strBookID)
+    QString strSql1 = QString("UPDATE book set count = count+1 where bookid = '%1';").arg(strBookID);
+    QString strSql2 = QString("DELETE from record where bookid = '%1' and userid = '%2'")
                          .arg(strBookID)
                          .arg(strUserID);
-    bool ret = q.exec(strSql);
-    if(!ret)
+    bool ret1 = q.exec(strSql1);
+    if(!ret1)
+    {
+        qDebug()<<q.lastError().text();
+    }
+
+    bool ret2 = q.exec(strSql2);
+    if(!ret2)
     {
         qDebug()<<q.lastError().text();
     }
@@ -271,12 +279,12 @@ QString sqlmange::ReturnBook(QString strUserID, QString strBookID)
 QString sqlmange::BorrowBook(QString strUserID, QString strBookID)
 {
     //借阅图书
-    //让书本的数量-1
     // 创建 SQL 查询对象
     QSqlQuery q(m_db);
     // 构建 SQL 查询语句
-    // 使用占位符防止 SQL 注入攻击
+    // 查询书本数量-1
     QString strSql1 = QString("UPDATE book set count = count-1 where bookid = '%1'").arg(strBookID);
+    //添加记录
     QString strSql2 = QString("INSERT into record VALUES(NULL,'%1','%2','%3','%4','')")
                             .arg(strBookID)
                             .arg(strUserID)
@@ -343,6 +351,21 @@ QVector<QStringList> sqlmange::getRecords(QString strCondition)
     }
     // 返回查询结果
     return vec;
+}
+
+QString sqlmange::clearRecord()
+{
+    // 创建 SQL 查询对象
+    QSqlQuery q(m_db);
+    // 构建 SQL 查询语句
+    // 使用占位符防止 SQL 注入攻击
+    QString strSql1 = QString("DELETE from record");
+    QString strSql2 = QString("DELETE FROM sqlite_sequence WHERE name = 'record'");
+
+    q.exec(strSql1);
+    q.exec(strSql2);
+
+    return QString("");
 }
 
 

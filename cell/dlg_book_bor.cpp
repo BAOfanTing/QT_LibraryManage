@@ -25,6 +25,7 @@ void Dlg_book_bor::setBookID(int id)
 
 void Dlg_book_bor::setType(bool isReturn)
 {
+    //设置是归还还是借阅，并显示在页面上
     m_isReturn = isReturn;
     if(m_isReturn)
     {
