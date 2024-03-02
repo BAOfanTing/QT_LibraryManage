@@ -47,6 +47,7 @@ bool sqlmange::login(QString strUsername, QString strPassword,int &userid)
     if(!ret)
     {
         qDebug()<<q.lastError().text();
+        QMessageBox::information(nullptr, "信息", "账号或密码错误");
     }
     else
     {

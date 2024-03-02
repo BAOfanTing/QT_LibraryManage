@@ -2,7 +2,8 @@
 #define DIALOG_LOGIN_H
 
 #include <QDialog>
-
+#include "lib/sqlmange.h"
+#include <QMessageBox>
 namespace Ui {
 class Dialog_login;
 }

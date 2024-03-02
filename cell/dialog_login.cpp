@@ -16,8 +16,17 @@ Dialog_login::~Dialog_login()
 void Dialog_login::on_btn_login_clicked()
 {
     //1是成功，2是失败，0是退出
-    setResult(1);
-    this->hide();
+    int userid = 0;
+    bool ret = sqlmange::getInstance()->login(ui->lb_username->text(),ui->lb_password->text(),userid);
+    if(ret)
+    {
+        setResult(1);
+        this->hide();
+    }
+    else
+    {
+        QMessageBox::information(nullptr, "信息", "账号或密码错误");
+    }
 }
 
 
