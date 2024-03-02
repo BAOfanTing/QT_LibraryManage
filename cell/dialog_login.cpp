@@ -17,7 +17,7 @@ void Dialog_login::on_btn_login_clicked()
 {
     //1是成功，2是失败，0是退出
     int userid = 0;
-    bool ret = sqlmange::getInstance()->login(ui->lb_username->text(),ui->lb_password->text(),userid);
+    bool ret = sqlmange::getInstance()->login(ui->le_username->text(),ui->le_password->text(),userid);
     if(ret)
     {
         setResult(1);

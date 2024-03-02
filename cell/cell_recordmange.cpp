@@ -39,14 +39,14 @@ void Cell_RecordMange::on_btn_del_clicked()
 void Cell_RecordMange::initPage(QString strCondition = "")
 {
     //获取所有图书
-    //查询数据库并显示
+    //查询数据库并显示.
     QVector<QStringList> l = sqlmange::getInstance()->getRecords(strCondition);
 
     //清空之前的数据
     m_model.clear();
 
     //设置表格列头标签
-    m_model.setHorizontalHeaderLabels(QStringList{"id","图书id","用户id","开始时间","结束时间","记录"});
+    m_model.setHorizontalHeaderLabels(QStringList{"id","图书id","用户id","开始时间","结束时间","记录","姓名","年级班级","权限","学院","用户名","密码","书本名称","价格","类型1","类型2","类型3","数量",""});
 
     for(int i = 0;i<l.size();i++)
     {
