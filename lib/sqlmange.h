@@ -32,6 +32,9 @@ public:
     //添加用户
     void AddUser(QVector<QStringList> addData);
 
+    //注册用户
+    bool RegisterUser(QString nickname ,QString grade,QString department ,QString strUsername ,QString strPassword);
+
     //删除用户
     void DelUser(QString strID);
 

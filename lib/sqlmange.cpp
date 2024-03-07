@@ -17,20 +17,57 @@ sqlmange* sqlmange::getInstance()
     return instance;
 }
 
+// void sqlmange::init()
+// {
+//     // 打开数据库
+//     // 使用 QSQLITE 数据库驱动
+//     m_db = QSqlDatabase::addDatabase("QSQLITE");
+
+//     // 设置数据库名称
+//     // 数据库文件位于应用程序目录下的 db/book.db 文件
+//     m_db.setDatabaseName(QCoreApplication::applicationDirPath() + "/db/book.db");
+
+//     // 打开数据库
+//     // 并输出打开结果到调试信息
+//     qDebug() << m_db.open();
+// }
+
+//测试mysql
 void sqlmange::init()
 {
     // 打开数据库
-    // 使用 QSQLITE 数据库驱动
-    m_db = QSqlDatabase::addDatabase("QSQLITE");
+    // 使用 QMYSQL3 数据库驱动
+    m_db = QSqlDatabase::addDatabase("QMYSQL");
 
     // 设置数据库名称
-    // 数据库文件位于应用程序目录下的 db/book.db 文件
-    m_db.setDatabaseName(QCoreApplication::applicationDirPath() + "/db/book.db");
+    // 数据库名为 my_database
+    m_db.setDatabaseName("book");
+
+    // 设置数据库用户名和密码
+    // 用户名为 root，密码为 123456
+    m_db.setUserName("root");
+    m_db.setPassword("123456");
+
+    // 设置数据库服务器地址
+    // 服务器地址为 localhost
+    m_db.setHostName("xxx");
+    m_db.setPort(3306);
+
 
     // 打开数据库
     // 并输出打开结果到调试信息
-    qDebug() << m_db.open();
+    bool ret = m_db.open();
+    if(ret)
+    {
+        QMessageBox::information(nullptr,"信息","连接数据库成功");
+    }
+    else
+    {
+         QMessageBox::information(nullptr,"信息","连接数据库失败");
+    }
+    qDebug() <<"数据库连接："+ m_db.open();
 }
+
 
 bool sqlmange::login(QString strUsername, QString strPassword,int &userid)
 {
@@ -38,7 +75,7 @@ bool sqlmange::login(QString strUsername, QString strPassword,int &userid)
     QSqlQuery q(m_db);
     // 构建 SQL 查询语句
     // 使用占位符防止 SQL 注入攻击
-    QString strSql = QString("select * from user where username = '%1' and password = '%2'").arg(strUsername).arg(strPassword);
+    QString strSql = QString("select * from usertb where username = '%1' and password = '%2'").arg(strUsername).arg(strPassword);
 
     // 执行 SQL 查询
     bool ret = q.exec(strSql);
@@ -47,7 +84,6 @@ bool sqlmange::login(QString strUsername, QString strPassword,int &userid)
     if(!ret)
     {
         qDebug()<<q.lastError().text();
-        QMessageBox::information(nullptr, "信息", "账号或密码错误");
     }
     else
     {
@@ -69,7 +105,7 @@ QVector<QStringList> sqlmange::getUsers(QString strCondition)
     // 构建 SQL 查询语句
     // 使用占位符防止 SQL 注入攻击
     // 使用 strCondition 作为查询条件
-    QString strSql = QString("select * from user %1").arg(strCondition);
+    QString strSql = QString("select * from usertb %1").arg(strCondition);
 
     // 存储查询结果的容器
     QVector<QStringList> vec;
@@ -124,7 +160,7 @@ void sqlmange::AddUser(QVector<QStringList> addData)
         // 构建 SQL 插入语句
         // 使用占位符防止 SQL 注入攻击
         // 将字符串转换为 UTF-8 编码，避免中文乱码
-        QString strSql = QString("insert into user VALUES(NULL,'%1','%2','%3','%4','%5','%6')").arg(addData[i][0].toUtf8()).arg(addData[i][1].toUtf8()).arg(addData[i][2].toUtf8()).arg(addData[i][3].toUtf8()).arg(addData[i][4].toUtf8()).arg(addData[i][5].toUtf8());
+        QString strSql = QString("insert into usertb VALUES(NULL,'%1','%2','%3','%4','%5','%6')").arg(addData[i][0].toUtf8()).arg(addData[i][1].toUtf8()).arg(addData[i][2].toUtf8()).arg(addData[i][3].toUtf8()).arg(addData[i][4].toUtf8()).arg(addData[i][5].toUtf8());
 
         // 执行 SQL 插入
         q.exec(strSql);
@@ -134,13 +170,29 @@ void sqlmange::AddUser(QVector<QStringList> addData)
     m_db.commit();
 }
 
+//注册用户
+bool sqlmange::RegisterUser(QString nickname, QString grade, QString department, QString strUsername, QString strPassword)
+{
+    // 创建 SQL 查询对象
+    QSqlQuery q(m_db);
+    // 构建 SQL 查询语句
+    // 使用占位符防止 SQL 注入攻击
+    QString strSql = QString("insert into usertb VALUES(NULL,'%1','%2','%3','%4','%5','%6')").arg(nickname).arg(grade).arg(department).arg("").arg(strUsername).arg(strPassword);
+    // 执行 SQL 查询
+    bool ret = q.exec(strSql);
+    if(!ret)
+    {
+        qDebug()<<q.lastError().text();
+    }
+}
+
 void sqlmange::DelUser(QString strID)
 {
     // 创建 SQL 查询对象
     QSqlQuery q(m_db);
     // 构建 SQL 查询语句
     // 使用占位符防止 SQL 注入攻击
-    QString strSql = QString("delete from user where userid = '%1'").arg(strID);
+    QString strSql = QString("delete from usertb where userid = '%1'").arg(strID);
     // 执行 SQL 查询
     q.exec(strSql);
 }
@@ -315,7 +367,7 @@ QVector<QStringList> sqlmange::getRecords(QString strCondition)
     // 构建 SQL 查询语句
     // 使用占位符防止 SQL 注入攻击
     // 使用 strCondition 作为查询条件
-    QString strSql = QString("select * from record join user using(userid) join book using(bookid)").arg(strCondition);
+    QString strSql = QString("select * from record join usertb using(userid) join book using(bookid)").arg(strCondition);
 
     // 存储查询结果的容器
     QVector<QStringList> vec;

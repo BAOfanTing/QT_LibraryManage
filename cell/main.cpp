@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "dialog_login.h"
 #include "lib/sqlmange.h"
+#include "dlg_register.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,11 +20,10 @@ int main(int argc, char *argv[])
         w.show();
         return a.exec();
     }
-    // 如果对话框返回值为0，则退出程序
+    // 如果对话框返回值为0，执行登陆程序
     else if (ret == 0)
     {
-        exit(0);
-        return 0;
+
     }
     return 0;
 }

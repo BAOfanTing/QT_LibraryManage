@@ -20,8 +20,7 @@ private slots:
     //登陆
     void on_btn_login_clicked();
 
-    //退出
-    void on_btn_exit_clicked();
+    void on_btn_register_clicked();
 
 private:
     Ui::Dialog_login *ui;
